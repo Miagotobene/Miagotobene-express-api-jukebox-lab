@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const PORT = 4000;
+const cors = require('cors');
+app.use(cors());
 
 // import the controller file
 const trackRouter = require('./controllers/tracks.js')
@@ -16,6 +18,7 @@ mongoose.connection.on('connected', () => {
 
 // import middleware functions 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 // import router here
@@ -25,3 +28,4 @@ app.use('/tracks', trackRouter);
 app.listen(PORT, () => {
     console.log('App is listening:', PORT)
 })
+
